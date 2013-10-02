@@ -19,7 +19,7 @@ Web Component wrapper for Markdown using Polymer.
 2. Import [markdown-js](https://github.com/evilstreak/markdown-js):
 
   ```html
-  <script src="./bower_components/markdown/lib/markdown.js"></script>
+  <script src="lib/markdown.js"></script>
   ```
 
 3. Import Custom Element:
