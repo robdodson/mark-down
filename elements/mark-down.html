@@ -1,0 +1,24 @@
+<polymer-element name="mark-down">
+  <template>
+    <div id="markdown"></div>
+  </template>
+  <script>
+    Polymer("mark-down", {
+      created: function() {
+        var content = this.trim(this.innerHTML);
+        var parsed = markdown.toHTML(content);
+        this.$.markdown.innerHTML = parsed;
+      },
+      // Thanks Ryan Seddon! (https://github.com/ryanseddon/markdown-component)
+      // Remove all leading/trailing whitespace so it's not confused as 
+      // a code block
+      trim: function(str) {
+        var cleaned = str.split('\n').map(function(x) {
+          return x.trim();
+        }).join('\n');
+
+        return cleaned;
+      }
+    });
+  </script>
+</polymer-element>
