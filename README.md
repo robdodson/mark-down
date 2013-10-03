@@ -1,4 +1,4 @@
-# &lt;mark-down&gt;
+# &lt;mark-down&gt; & &lt;mark-down-editor&gt;
 
 Web Component wrapper for Markdown using Polymer.
 
@@ -32,6 +32,10 @@ Web Component wrapper for Markdown using Polymer.
 
   ```html
   <mark-down>Hello, **world!**</mark-down>
+
+  <!-- or -->
+
+  <mark-down-editor>Hello, **world!**</mark-down-editor>
   ```
 
 ## Contributing
@@ -46,6 +50,8 @@ Web Component wrapper for Markdown using Polymer.
 
 * v0.1.0 October 02, 2013
   * Initial commit
+* v0.2.1 October 03, 2013
+  * Add mark-down-editor tag
 
 ## License
 

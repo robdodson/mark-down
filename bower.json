@@ -1,11 +1,11 @@
 {
   "name": "mark-down",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "authors": [
     "Rob Dodson <lets.email.rob@gmail.com>"
   ],
   "description": "A polymer element for rendering markdown",
-  "main": ["mark-down.html", "mark-down-editor.html"],
+  "main": ["mark-down.html"],
   "keywords": [
     "markdown",
     "polymer",
