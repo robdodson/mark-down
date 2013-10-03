@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Markdown Polymer Element</title>
-    
+
     <!-- Include our Markdown lib -->
     <script src="./bower_components/markdown/lib/markdown.js"></script>
 
@@ -12,6 +12,8 @@
 
     <!-- Import our polymer elements -->
     <link rel="import" href="./elements/mark-down.html">
+    <link rel="import" href="./elements/mark-down-live.html">
+
   </head>
   <body>
     <!-- Test our awesome new tag -->
@@ -25,5 +27,8 @@
 
       This [is a link](http://robdodson.me)
     </mark-down>
+    <hr>
+    <mark-down-live text="#markdown goes here">
+    </mark-down-live>
   </body>
 </html>
