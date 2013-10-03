@@ -12,7 +12,7 @@
 
     <!-- Import our polymer elements -->
     <link rel="import" href="./elements/mark-down.html">
-    <link rel="import" href="./elements/mark-down-live.html">
+    <link rel="import" href="./elements/mark-down-editor.html">
 
   </head>
   <body>
@@ -27,8 +27,18 @@
 
       This [is a link](http://robdodson.me)
     </mark-down>
+    
     <hr>
-    <mark-down-live text="#markdown goes here">
-    </mark-down-live>
+
+    <mark-down-editor>
+      # This is a heading
+      ## This is a subheading
+
+      Here is **more** _Markdown!_
+
+      `This is some codez`
+
+      This [is a link](http://robdodson.me)
+    </mark-down-editor>
   </body>
 </html>

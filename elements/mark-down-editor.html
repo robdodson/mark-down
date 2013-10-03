@@ -1,35 +1,38 @@
-<polymer-element name="mark-down-live" attributes="text">
+<polymer-element name="mark-down-editor">
   <template>
     <style>
+      :host {
+        display: block;
+      }
       #markup, #markdown {
-        width: 50%;
-        float: left;
+        display: inline-block;
+        vertical-align: top;
+      }
+      #markup {
+        width: 30%;
+        margin-right: 50px;
       }
       #editor {
-        width: 80%;
+        width: 100%;
         height: 250px;
       }
+      #markdown {
+        width: 60%;
+      }
     </style>
-    <div id="markup">
-      <textarea id="editor">{{text}}</textarea>
+    <div id="markup" part="markup">
+      <textarea id="editor" part="editor" on-keyup="render" value="{{ text }}"></textarea>
     </div>
-    <div id="markdown"></div>
+    <div id="markdown" part="markdown"></div>
   </template>
   <script>
-    Polymer("mark-down-live", {
-      ready: function() {
-        this.text = this.text || "";
-        this.rendered = "";
-        var that = this;
-        this.$.editor.onkeyup = function(ev) {
-          that.render();
-        }
+    Polymer("mark-down-editor", {
+      created: function() {
+        this.text = this.trim(this.innerHTML);
         this.render();
       },
       render: function() {
-        this.text = this.$.editor.value;
-        var content = this.trim(this.text);
-        var parsed = markdown.toHTML(content);
+        var parsed = markdown.toHTML(this.text);
         this.$.markdown.innerHTML = parsed;
       },
       // Thanks Ryan Seddon! (https://github.com/ryanseddon/markdown-component)
