@@ -52,6 +52,9 @@ Web Component wrapper for Markdown using Polymer.
   * Initial commit
 * v0.2.1 October 03, 2013
   * Add mark-down-editor tag
+* v0.2.2 October 07, 2013
+  * Added text attribute so change handlers work
+  * Added old and new syntax for styling host elements
 
 ## License
 

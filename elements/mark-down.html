@@ -1,10 +1,11 @@
 <!-- mark-down definition -->
-<polymer-element name="mark-down">
+<polymer-element name="mark-down" attributes="text">
   <template>
     <style>
-      :host {
-        display: inline-block;
-      }
+      /* Old Busted */
+      @host { * { display: block; } }
+      /* New Hotness */
+      *:host { display: block; }
     </style>
     <div id="markdown" part="markdown"></div>
   </template>
@@ -12,55 +13,45 @@
     Polymer("mark-down", {
       created: function() {
         this.text = this.trim(this.innerHTML);
-        this.render();
       },
-      render: function() {
-        var parsed = markdown.toHTML(this.text);
-        this.$.markdown.innerHTML = parsed;
+      textChanged: function() {
+        this.$.markdown.innerHTML = markdown.toHTML(this.text);
       },
       // Thanks Ryan Seddon! (https://github.com/ryanseddon/markdown-component)
       // Remove all leading/trailing whitespace so it's not confused as 
       // a code block
       trim: function(str) {
-        var cleaned = str.split('\n').map(function(x) {
-          return x.trim();
-        }).join('\n');
-
-        return cleaned;
+        return str.replace(/^[^\S\n]+/gm,'');
       }
     });
   </script>
 </polymer-element>
 
 <!-- mark-down-editor definition, extends mark-down -->
-<polymer-element name="mark-down-editor" extends="mark-down">
+<polymer-element name="mark-down-editor" extends="mark-down" noscript>
   <template>
     <style>
-      :host {
-        display: block;
-      }
-      #markup, #markdown {
-        display: inline-block;
-        vertical-align: top;
-      }
+      /* Old Busted */
+      @host { * { display: block; } }
+      /* New Hotness */
+      *:host { display: block; }
+
       #markup {
+        float: left;
         width: 30%;
         margin-right: 50px;
       }
       #editor {
         width: 100%;
-        height: 250px;
+        height: 220px;
       }
       #markdown {
-        width: 60%;
+        overflow: hidden;
       }
     </style>
     <div id="markup" part="markup">
-      <textarea id="editor" part="editor" on-keyup="render" value="{{ text }}"></textarea>
+      <textarea id="editor" part="editor" value="{{ text }}"></textarea>
     </div>
     <div id="markdown" part="markdown"></div>
   </template>
-  <script>
-    Polymer("mark-down-editor");
-  </script>
 </polymer-element>
