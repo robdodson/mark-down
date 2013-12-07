@@ -14,6 +14,9 @@
       ready: function() {
         this.text = this.trim(this.innerHTML);
       },
+      ready: function() {
+		    this.textChanged();
+      },
       textChanged: function() {
         this.$.markdown.innerHTML = markdown.toHTML(this.text);
       },
