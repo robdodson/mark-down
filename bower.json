@@ -1,6 +1,6 @@
 {
   "name": "mark-down",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "authors": [
     "Rob Dodson <lets.email.rob@gmail.com>"
   ],
@@ -11,10 +11,9 @@
   "keywords": [
     "markdown",
     "polymer",
-    "web",
-    "components",
-    "custom",
-    "elements"
+    "web-components",
+    "custom-elements",
+    "polymer-elements"
   ],
   "license": "MIT",
   "homepage": "http://robdodson.me",
