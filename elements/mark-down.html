@@ -11,7 +11,7 @@
   </template>
   <script>
     Polymer("mark-down", {
-      created: function() {
+      ready: function() {
         this.text = this.trim(this.innerHTML);
       },
       textChanged: function() {

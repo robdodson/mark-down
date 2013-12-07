@@ -24,7 +24,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "~0.0.20130912",
+    "polymer": "latest",
     "markdown": "~0.5.0"
   }
 }
