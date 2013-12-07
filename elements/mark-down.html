@@ -15,7 +15,7 @@
         this.text = this.trim(this.innerHTML);
       },
       textChanged: function() {
-        this.$.markdown.innerHTML = markdown.toHTML(this.text);
+        this.$.markdown.innerHTML = marked(this.text);
       },
       // Thanks Ryan Seddon! (https://github.com/ryanseddon/markdown-component)
       // Remove all leading/trailing whitespace so it's not confused as 

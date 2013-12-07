@@ -10,16 +10,17 @@ Web Component wrapper for Markdown using Polymer.
 
 ## Usage
 
-1. Import Web Components' polyfill:
+1. Include platform.js and polymer.js:
 
   ```html
-  <script src="//cdnjs.cloudflare.com/ajax/libs/polymer/0.0.20130905/polymer.min.js"></script>
+  <script src="./bower_components/platform/platform.js"></script>
+  <script src="./bower_components/polymer/polymer.js"></script>
   ```
 
-2. Import [markdown-js](https://github.com/evilstreak/markdown-js):
+2. Include [marked][]:
 
   ```html
-  <script src="lib/markdown.js"></script>
+  <script src="./bower_components/marked/lib/marked.js"></script>
   ```
 
 3. Import Custom Element:
@@ -59,7 +60,11 @@ Web Component wrapper for Markdown using Polymer.
   * Correct improper bower `main`
 * v0.3.0 December 07, 2013
   * Do setup work in `ready` callback instead of `created`
+* v0.4.0 December 07, 2013
+  * Switch to [marked][] library
 
 ## License
 
 [MIT License](http://opensource.org/licenses/MIT)
+
+[marked]: https://github.com/chjj/marked
