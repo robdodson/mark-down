@@ -57,6 +57,8 @@ Web Component wrapper for Markdown using Polymer.
   * Added old and new syntax for styling host elements
 * v0.2.3 October 09, 2013
   * Correct improper bower `main`
+* v0.3.0 December 07, 2013
+  * Do setup work in `ready` callback instead of `created`
 
 ## License
 
