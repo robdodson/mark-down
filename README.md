@@ -64,6 +64,8 @@ Web Component wrapper for Markdown using Polymer.
   * Switch to [marked][] library
 * v0.5.0 March 02, 2014
   * Moved [marked][] dependency inside of element
+* v0.5.1 March 02, 2014
+  * Add polymer import to element
 
 ## License
 
