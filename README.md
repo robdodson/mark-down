@@ -10,26 +10,26 @@ Web Component wrapper for Markdown using Polymer.
 
 ## Usage
 
-1. Include platform.js and polymer.js:
+1. Install the component
 
-  ```html
-  <script src="./bower_components/platform/platform.js"></script>
-  <script src="./bower_components/polymer/polymer.js"></script>
+  ```
+  bower install mark-down --save
   ```
 
-2. Include [marked][]:
+2. Include platform.js and polymer.js:
 
   ```html
-  <script src="./bower_components/marked/lib/marked.js"></script>
+  <script src="bower_components/platform/platform.js"></script>
+  <link rel="import" href="bower_components/polymer/polymer.html">
   ```
 
-3. Import Custom Element:
+2. Import Custom Element:
 
   ```html
   <link rel="import" href="elements/mark-down.html">
   ```
 
-4. Start using it!
+3. Start using it!
 
   ```html
   <mark-down>Hello, **world!**</mark-down>
@@ -62,6 +62,8 @@ Web Component wrapper for Markdown using Polymer.
   * Do setup work in `ready` callback instead of `created`
 * v0.4.0 December 07, 2013
   * Switch to [marked][] library
+* v0.5.0 March 02, 2014
+  * Moved [marked][] dependency inside of element
 
 ## License
 
