@@ -14,7 +14,7 @@
   <script>
     Polymer("mark-down", {
       ready: function() {
-        this.text = this.trim(this.innerHTML);
+        this.text = this.trim(this.textContent);
       },
       textChanged: function() {
         this.$.markdown.innerHTML = marked(this.text);
