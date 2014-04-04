@@ -9,12 +9,38 @@
         display: block;
       }
     </style>
-    <div id="markdown" part="markdown"></div>
+    <div on-click="{{showTextarea}}" id="markdown" part="markdown"></div>
+    <content id="textarea" select="textarea"></content>
   </template>
   <script>
     Polymer("mark-down", {
       ready: function() {
         this.text = this.trim(this.textContent);
+
+        // Check to see if there's a <textarea> child
+        if (this.$.textarea.getDistributedNodes().length) {
+          this.isToggleable = true;
+          this.textarea = this.$.textarea.getDistributedNodes()[0];
+          this.textarea.addEventListener('blur', this.showMarkdown.bind(this));
+          this.textarea.addEventListener('change', this.textareaChanged.bind(this));
+          this.textarea.style.display = 'none';
+        }
+      },
+      showTextarea: function() {
+        if (!this.isToggleable) {
+          return;
+        }
+
+        this.textarea.style.display = 'block';
+        this.textarea.focus();
+        this.$.markdown.style.display = 'none';
+      },
+      showMarkdown: function() {
+        this.textarea.style.display = 'none';
+        this.$.markdown.style.display = 'block';
+      },
+      textareaChanged: function() {
+        this.text = this.textarea.value;
       },
       textChanged: function() {
         this.$.markdown.innerHTML = marked(this.text);
