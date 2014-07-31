@@ -1,18 +1,39 @@
 <link rel="import" href="../polymer/polymer.html">
-<script src="../marked/lib/marked.js"></script>
+<link rel="import" href="marked-import.html">
 
-<!-- mark-down definition -->
+<!--
+Web Component wrapper for Markdown using Polymer.
+
+##### Example
+
+    <mark-down>
+      Hello, **world!**
+    </mark-down>
+
+or alternatively:
+
+    <mark-down text="Hello, **world!**"></mark-down>
+
+@element mark-down
+@blurb Web Component wrapper for Markdown using Polymer.
+@status alpha
+@homepage http://robdodson.github.io/mark-down
+-->
 <polymer-element name="mark-down" attributes="text">
   <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <div id="markdown" part="markdown"></div>
+    <link rel="stylesheet" href="mark-down.css">
+    <div id="markdown"></div>
   </template>
   <script>
     Polymer("mark-down", {
+      /**
+       * The `text` attribute can be set to a string of Markdown
+       * that you would like to see rendered
+       *
+       * @attribute text
+       * @type string
+       */
+
       ready: function() {
         this.text = this.trim(this.textContent);
       },
@@ -20,41 +41,11 @@
         this.$.markdown.innerHTML = marked(this.text);
       },
       // Thanks Ryan Seddon! (https://github.com/ryanseddon/markdown-component)
-      // Remove all leading/trailing whitespace so it's not confused as 
+      // Remove all leading/trailing whitespace so it's not confused as
       // a code block
       trim: function(str) {
         return str.replace(/^[^\S\n]+/gm,'');
       }
     });
   </script>
-</polymer-element>
-
-<!-- mark-down-editor definition, extends mark-down -->
-<polymer-element name="mark-down-editor" extends="mark-down" noscript>
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-
-      #markup {
-        float: left;
-        width: 30%;
-        margin-right: 50px;
-      }
-
-      #editor {
-        width: 100%;
-        height: 220px;
-      }
-
-      #markdown {
-        overflow: hidden;
-      }
-    </style>
-    <div id="markup" part="markup">
-      <textarea id="editor" part="editor" value="{{ text }}"></textarea>
-    </div>
-    <div id="markdown" part="markdown"></div>
-  </template>
 </polymer-element>

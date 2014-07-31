@@ -6,7 +6,8 @@
   ],
   "description": "A polymer element for rendering markdown",
   "main": [
-    "elements/mark-down.html"
+    "mark-down.html",
+    "mark-down-editor.html"
   ],
   "keywords": [
     "markdown",
@@ -25,7 +26,7 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "~0.2.0",
-    "marked": "~0.2.10"
+    "polymer": "Polymer/polymer#~0.3.4",
+    "marked": "~0.3.2"
   }
 }
