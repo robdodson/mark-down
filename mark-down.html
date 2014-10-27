@@ -45,7 +45,11 @@ or alternatively:
         this.text = this.trim(this.textContent);
       },
       textChanged: function() {
-        this.$.markdown.innerHTML = marked(this.text);
+        if (this.text === null) {
+          this.$.markdown.innerHTML = '';
+        } else {
+          this.$.markdown.innerHTML = marked(this.text);
+        }
         this.fire('mark-down-ready');
       },
       // Thanks Ryan Seddon! (https://github.com/ryanseddon/markdown-component)
