@@ -42,7 +42,7 @@ or alternatively:
        */
 
       ready: function() {
-        this.text = this.trim(this.textContent);
+        this.text = this.text || this.trim(this.textContent);
       },
       textChanged: function() {
         if (this.text === null) {
