@@ -1,10 +1,10 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="marked-import.html">
+<link rel="import" href="mark-down.html">
 
 <!--
 A tiny markdown editor which extends the mark-down element
 
-##### Example
+Example:
 
     <mark-down-editor>
       Hello, **world!**
@@ -14,17 +14,54 @@ or alternatively:
 
     <mark-down-editor text="Hello, **world!**"></mark-down-editor>
 
-@element mark-down-editor
-@blurb A tiny markdown editor which extends the mark-down element
-@status alpha
-@homepage http://robdodson.github.io/mark-down
 -->
-<polymer-element name="mark-down-editor" extends="mark-down" noscript>
+<dom-module id="mark-down-editor">
+
+  <link rel="stylesheet" href="mark-down-editor.css">
+
   <template>
-    <link rel="stylesheet" href="mark-down-editor.css">
     <div id="markup" part="markup">
       <textarea id="editor" part="editor" value="{{text}}"></textarea>
     </div>
-    <div id="markdown" part="markdown"></div>
+    <mark-down text="{{text}}"></mark-down>
   </template>
-</polymer-element>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'mark-down-editor',
+
+    published: {
+      /** A string of markdown that you wish to see rendered. */
+      text: String,
+    },
+
+    configure: function(properties) {
+      return {
+        text: properties.text || this.textContent,
+      };
+    },
+
+    ready: function() {
+      this._onInputBound = this._onInput.bind(this);
+    },
+
+    attached: function() {
+      this.$.editor.addEventListener('input', this._onInputBound);
+    },
+
+    detached: function() {
+      this.$.editor.removeEventListener('input', this._onInputBound);
+    },
+
+    _onInput: function() {
+      this.text = this.$.editor.value;
+      console.log('input', arguments);
+    },
+
+  });
+
+</script>

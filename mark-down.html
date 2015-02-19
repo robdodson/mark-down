@@ -4,7 +4,7 @@
 <!--
 Web Component wrapper for Markdown using Polymer.
 
-##### Example
+Example:
 
     <mark-down>
       Hello, **world!**
@@ -14,50 +14,61 @@ or alternatively:
 
     <mark-down text="Hello, **world!**"></mark-down>
 
-@element mark-down
-@blurb Web Component wrapper for Markdown using Polymer.
-@status alpha
-@homepage http://robdodson.github.io/mark-down
 -->
-<polymer-element name="mark-down" attributes="text">
+<dom-module id="mark-down">
+
+  <link rel="stylesheet" href="mark-down.css">
+
   <template>
-    <link rel="stylesheet" href="mark-down.css">
     <div id="markdown"></div>
   </template>
-  <script>
-    Polymer("mark-down", {
-      /**
-       * The `text` attribute can be set to a string of Markdown
-       * that you would like to see rendered
-       *
-       * @attribute text
-       * @type string
-       */
 
-      /**
-       * The `mark-down-ready` event is fired after the marked-up HTML is
-       * inserted into the parent container.
-       *
-       * @event mark-down-ready
-       */
+</dom-module>
 
-      ready: function() {
-        this.text = this.text || this.trim(this.textContent);
-      },
-      textChanged: function() {
-        if (this.text === null) {
-          this.$.markdown.innerHTML = '';
-        } else {
-          this.$.markdown.innerHTML = marked(this.text);
-        }
-        this.fire('mark-down-ready');
-      },
-      // Thanks Ryan Seddon! (https://github.com/ryanseddon/markdown-component)
-      // Remove all leading/trailing whitespace so it's not confused as
-      // a code block
-      trim: function(str) {
-        return str.replace(/^[^\S\n]+/gm,'');
+<script>
+
+  Polymer({
+
+    is: 'mark-down',
+
+    /**
+     * The `mark-down-ready` event is fired after the marked-up HTML is
+     * inserted into the parent container.
+     *
+     * @event mark-down-ready
+     */
+
+    published: {
+      /** A string of markdown that you wish to see rendered. */
+      text: String,
+    },
+
+    bind: {
+      'text': 'textChanged',
+    },
+
+    configure: function(properties) {
+      return {
+        text: properties.text || this.trim(this.textContent),
+      };
+    },
+
+    textChanged: function() {
+      if (this.text === null) {
+        this.$.markdown.innerHTML = '';
+      } else {
+        this.$.markdown.innerHTML = marked(this.text);
       }
-    });
-  </script>
-</polymer-element>
+      this.fire('mark-down-ready');
+    },
+
+    // Thanks Ryan Seddon! (https://github.com/ryanseddon/markdown-component)
+    // Remove all leading/trailing whitespace so it's not confused as
+    // a code block
+    trim: function(str) {
+      return str.replace(/^[^\S\n]+/gm,'');
+    },
+
+  });
+  
+</script>
