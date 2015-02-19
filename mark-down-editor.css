@@ -1,18 +1,18 @@
-:host {
+mark-down-editor {
   display: block;
 }
 
-#markup {
+mark-down-editor #markup {
   float: left;
   width: 30%;
   margin-right: 50px;
 }
 
-#editor {
+mark-down-editor #editor {
   width: 100%;
   height: 220px;
 }
 
-#markdown {
+mark-down-editor #markdown {
   overflow: hidden;
 }
