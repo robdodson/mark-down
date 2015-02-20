@@ -6,14 +6,18 @@ Web Component wrapper for Markdown using Polymer.
 
 Example:
 
+    <mark-down text="Hello, **world!**"></mark-down>
+
+    or alternatively:
+
     <mark-down>
       Hello, **world!**
     </mark-down>
 
-or alternatively:
-
-    <mark-down text="Hello, **world!**"></mark-down>
-
+Please be aware that you cannot safely change the text content of a `mark-down`
+element after it has been created. This is due to Polymer 0.8's shady DOM.
+The generated markdown elements may also be in the owning document rather than
+a shadow root.
 -->
 <dom-module id="mark-down">
 
@@ -54,11 +58,7 @@ or alternatively:
     },
 
     textChanged: function() {
-      if (this.text === null) {
-        this.$.markdown.innerHTML = '';
-      } else {
-        this.$.markdown.innerHTML = marked(this.text);
-      }
+      this.$.markdown.innerHTML = this.text ? marked(this.text) : '';
       this.fire('mark-down-ready');
     },
 
@@ -70,5 +70,5 @@ or alternatively:
     },
 
   });
-  
+
 </script>
