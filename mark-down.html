@@ -42,7 +42,7 @@ or alternatively:
        */
 
       ready: function() {
-        this.text = this.text || this.trim(this.textContent);
+        this.text = this.text || this.unindent(this.textContent);
       },
       textChanged: function() {
         if (this.text === null) {
@@ -52,12 +52,23 @@ or alternatively:
         }
         this.fire('mark-down-ready');
       },
-      // Thanks Ryan Seddon! (https://github.com/ryanseddon/markdown-component)
-      // Remove all leading/trailing whitespace so it's not confused as
-      // a code block
-      trim: function(str) {
-        return str.replace(/^[^\S\n]+/gm,'');
-      }
+      // Find the shortest indented line (ignoring blank lines), and remove all
+      // indentation up to that point.
+      unindent: function(str) {
+        // two spaces for tabs as a guess - we don't want to get into the business
+        // of trying to detect tab sizes.
+        var lines  = str.replace(/\t/g, '  ').split('\n');
+        var indent = lines.reduce(function(prev, line) {
+          if (/^\s*$/.test(line)) return prev;  // Completely ignore blank lines.
+
+          var lineIndent = line.match(/^(\s*)/)[0].length;
+          if (prev === null) return lineIndent;
+          return lineIndent < prev ? lineIndent : prev;
+        }, null);
+
+        return lines.map(function(l) { return l.substr(indent); }).join('\n');
+        return str.replace(/^[^\S\n]+/gm, '');
+      },
     });
   </script>
 </polymer-element>
