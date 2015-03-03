@@ -27,6 +27,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^0.5.2",
-    "marked": "~0.3.2"
+    "marked": "~0.3.2",
+    "prism": "prismjs/prism#gh-pages"
   }
 }

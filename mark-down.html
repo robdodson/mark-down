@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="marked-import.html">
+<link rel="import" href="prism-import.html">
 
 <!--
 Web Component wrapper for Markdown using Polymer.
@@ -53,12 +54,12 @@ a shadow root.
 
     configure: function(properties) {
       return {
-        text: properties.text || this._unindent(this.textContent),
+        text: properties.text || this.textContent,
       };
     },
 
     textChanged: function() {
-      this.$.markdown.innerHTML = this.text ? marked(this.text) : '';
+      this.$.markdown.innerHTML = this._markdown(this.text);
       this.fire('mark-down-ready');
     },
 
@@ -79,6 +80,26 @@ a shadow root.
       return lines.map(function(l) { return l.substr(indent); }).join('\n');
       return str.replace(/^[^\S\n]+/gm, '');
     },
+
+    _markdown: function(str) {
+      if (!str) return '';
+
+      return marked(this._unindent(str), {
+        highlight: function(code) {
+          return Prism.highlight(code, this._detectLanguage(code));
+        }.bind(this),
+      });
+    },
+
+    // Prism doesn't do language detection, so we perform a verrrry simple
+    // heuristic ourselves.
+    _detectLanguage: function(code) {
+      if (code.match(/^\s*</)) {
+        return Prism.languages.markup;
+      } else {
+        return Prism.languages.javascript;
+      }
+    }
 
   });
 
