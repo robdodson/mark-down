@@ -43,13 +43,12 @@ a shadow root.
      * @event mark-down-ready
      */
 
-    published: {
+    properties: {
       /** A string of markdown that you wish to see rendered. */
-      text: String,
-    },
-
-    bind: {
-      'text': 'textChanged',
+      text: {
+        type:     String,
+        observer: 'textChanged',
+      },
     },
 
     configure: function(properties) {
