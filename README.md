@@ -74,3 +74,7 @@ $ grunt deploy
 ## Changes
 
 For detailed changelog, check [Releases](https://github.com/robdodson/mark-down/releases).
+
+## License
+
+[MIT License](http://robdodson.mit-license.org/) © Rob Dodson
