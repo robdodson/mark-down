@@ -16,13 +16,20 @@ Example:
     </mark-down>
 
 Please be aware that you cannot safely change the text content of a `mark-down`
-element after it has been created. This is due to Polymer 0.8's shady DOM.
+element after it has been created. This is due to Polymer 1.0's shady DOM.
 The generated markdown elements may also be in the owning document rather than
 a shadow root.
+
+@element mark-down
+@demo demo/index.html
 -->
 <dom-module id="mark-down">
 
-  <link rel="stylesheet" href="mark-down.css">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
 
   <template>
     <div id="markdown"></div>
@@ -44,20 +51,21 @@ a shadow root.
      */
 
     properties: {
-      /** A string of markdown that you wish to see rendered. */
+      /**
+       * A string of markdown that you wish to see rendered.
+       *
+       * @default ''
+       */
       text: {
-        type:     String,
-        observer: 'textChanged',
-      },
+        type: String,
+        observer: '_textChanged',
+        value: function() {
+          return this.text || this.textContent;
+        }
+      }
     },
 
-    configure: function(properties) {
-      return {
-        text: properties.text || this.textContent,
-      };
-    },
-
-    textChanged: function() {
+    _textChanged: function() {
       this.$.markdown.innerHTML = this._markdown(this.text);
       this.fire('mark-down-ready');
     },

@@ -6,8 +6,7 @@
   ],
   "description": "A polymer element for rendering markdown",
   "main": [
-    "mark-down.html",
-    "mark-down-editor.html"
+    "mark-down.html"
   ],
   "keywords": [
     "markdown",
@@ -26,8 +25,11 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#0.8-preview",
-    "marked": "~0.3.2",
-    "prism": "prismjs/prism#gh-pages"
+    "polymer": "Polymer/polymer#~1.0.0",
+    "marked": "~0.3.3",
+    "prism": "prismjs/prism#~1.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#~1.0.0"
   }
 }
