@@ -1,7 +1,7 @@
 # &lt;mark-down&gt;
 ===================
 
-> 
+>
 
 See the [component page](http://robdodson.github.io/mark-down) for more information.
 
@@ -20,7 +20,7 @@ Or [download as ZIP](https://github.com/robdodson/mark-down/archive/master.zip).
 1. Import Web Components' polyfill:
 
 ```html
-<script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+<script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 ```
 
 2. Import Custom Element:
@@ -32,36 +32,23 @@ Or [download as ZIP](https://github.com/robdodson/mark-down/archive/master.zip).
 3. Start using it!
 
 ```html
-<mark-down></mark-down>
+<mark-down>This is **awesome**</mark-down>
 ```
 
-## Development
+## Playing With Your Element
 
-In order to run it locally you'll need to fetch some dependencies and a basic server setup.
+If you wish to work on the element in isolation, I recommend that you use
+[Polyserve](https://github.com/PolymerLabs/polyserve) to keep the bower dependencies
+in line. You can install it via:
 
-* Install [Bower](http://bower.io/) & [Grunt](http://gruntjs.com/):
+    npm install -g polyserve
 
-```sh
-$ [sudo] npm install -g bower grunt-cli
-```
+And you can run it via:
 
-* Install local dependencies:
+    polyserve
 
-```sh
-$ bower install && npm install
-```
-
-* To test your project, start the development server and open `http://localhost:8000`.
-
-```sh
-$ grunt server
-```
-
-* To provide a live demo, send everything to `gh-pages` branch.
-
-```sh
-$ grunt deploy
-```
+Once running, you can preview the element at
+`http://localhost:8080/components/mark-down/`.
 
 ## Contributing
 
@@ -70,10 +57,6 @@ $ grunt deploy
 3. Commit your changes: `git commit -m 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
-
-## Changes
-
-For detailed changelog, check [Releases](https://github.com/robdodson/mark-down/releases).
 
 ## License
 
