@@ -1,0 +1,113 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="marked-import.html">
+<link rel="import" href="prism-import.html">
+
+<!--
+Web Component wrapper for Markdown using Polymer.
+
+Example:
+
+    <mark-down text="Hello, **world!**"></mark-down>
+
+    or alternatively:
+
+    <mark-down>
+      Hello, **world!**
+    </mark-down>
+
+Please be aware that you cannot safely change the text content of a `mark-down`
+element after it has been created. This is due to Polymer 1.0's shady DOM.
+The generated markdown elements may also be in the owning document rather than
+a shadow root.
+
+@element mark-down
+@demo demo/index.html
+-->
+<dom-module id="mark-down">
+
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+
+  <template>
+    <div id="markdown"></div>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'mark-down',
+
+    /**
+     * The `mark-down-ready` event is fired after the marked-up HTML is
+     * inserted into the parent container.
+     *
+     * @event mark-down-ready
+     */
+
+    properties: {
+      /**
+       * A string of markdown that you wish to see rendered.
+       *
+       * @default ''
+       */
+      text: {
+        type: String,
+        observer: '_textChanged',
+        value: function() {
+          return this.text || this.textContent;
+        }
+      }
+    },
+
+    _textChanged: function() {
+      this.$.markdown.innerHTML = this._markdown(this.text);
+      this.fire('mark-down-ready');
+    },
+
+    // Find the shortest indented line (ignoring blank lines), and remove all
+    // indentation up to that point.
+    _unindent: function(str) {
+      // two spaces for tabs as a guess - we don't want to get into the business
+      // of trying to detect tab sizes.
+      var lines  = str.replace(/\t/g, '  ').split('\n');
+      var indent = lines.reduce(function(prev, line) {
+        if (/^\s*$/.test(line)) return prev;  // Completely ignore blank lines.
+
+        var lineIndent = line.match(/^(\s*)/)[0].length;
+        if (prev === null) return lineIndent;
+        return lineIndent < prev ? lineIndent : prev;
+      }, null);
+
+      return lines.map(function(l) { return l.substr(indent); }).join('\n');
+      return str.replace(/^[^\S\n]+/gm, '');
+    },
+
+    _markdown: function(str) {
+      if (!str) return '';
+
+      return marked(this._unindent(str), {
+        highlight: function(code) {
+          return Prism.highlight(code, this._detectLanguage(code));
+        }.bind(this),
+      });
+    },
+
+    // Prism doesn't do language detection, so we perform a verrrry simple
+    // heuristic ourselves.
+    _detectLanguage: function(code) {
+      if (code.match(/^\s*</)) {
+        return Prism.languages.markup;
+      } else {
+        return Prism.languages.javascript;
+      }
+    }
+
+  });
+
+</script>
