@@ -1,6 +1,8 @@
 # &lt;mark-down&gt;
 ===================
 
+# This component is no longer actively maintained. Please use [marked-element](https://elements.polymer-project.org/elements/marked-element) instead :)
+
 >
 
 See the [component page](http://robdodson.github.io/mark-down) for more information.
