@@ -1,4 +1,5 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="marked-import.html">
 <link rel="import" href="prism-import.html">
 
@@ -23,7 +24,7 @@ a shadow root.
 @element mark-down
 @demo demo/index.html
 -->
-<dom-module id="mark-down">
+<dom-module id="lancie-markdown">
 
   <style>
     :host {
@@ -32,6 +33,11 @@ a shadow root.
   </style>
 
   <template>
+    <iron-ajax
+       auto
+       url="{{src}}"
+       handle-as="text"
+       on-response="handleResponse"></iron-ajax>
     <div id="markdown"></div>
   </template>
 
@@ -41,7 +47,7 @@ a shadow root.
 
   Polymer({
 
-    is: 'mark-down',
+    is: 'lancie-markdown',
 
     /**
      * The `mark-down-ready` event is fired after the marked-up HTML is
@@ -56,18 +62,14 @@ a shadow root.
        *
        * @default ''
        */
-      text: {
+      src: {
         type: String,
-        observer: '_textChanged',
-        value: function() {
-          return this.text || this.textContent;
-        }
+        value: ""
       }
     },
 
-    _textChanged: function() {
-      this.$.markdown.innerHTML = this._markdown(this.text);
-      this.fire('mark-down-ready');
+    handleResponse: function(event) {
+      this.$.markdown.innerHTML = this._markdown(event.detail.response);
     },
 
     // Find the shortest indented line (ignoring blank lines), and remove all
